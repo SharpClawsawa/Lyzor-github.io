@@ -381,9 +381,9 @@
 
     <!-- 课程表区域 -->
     <div class="schedule-section">
-        <div class="section-title">📅 本周课程</div>
+        <div class="section-title">📅 利爪的本周日程和课程</div>
         <div class="courses-container" id="coursesContainer">
-            <div class="no-courses">正在加载课程表...</div>
+            <div class="no-courses">正在加载中~别急...</div>
         </div>
     </div>
 
@@ -537,7 +537,7 @@
 
             } else {
                 titleStatus = '休息';
-                statusMainElement.textContent = '利爪正在：休息';
+                statusMainElement.textContent = '利爪正在：休息中~';
                 statusMainElement.className = 'status-main status-rest';
                 statusDetailElement.textContent = '';
                 progressFillElement.style.width = '0%';
@@ -686,10 +686,10 @@
 
             } catch (error) {
                 console.error('加载课程数据失败:', error);
-                document.getElementById('statusMain').textContent = '加载课程表失败';
-                document.getElementById('statusDetail').textContent = '请检查schedule.json文件';
+                document.getElementById('statusMain').textContent = '加载课程表失败惹~';
+                document.getElementById('statusDetail').textContent = '是不是日程文件又炸了，或者是直接在本地运行了呀~';
                 document.getElementById('coursesContainer').innerHTML =
-                    '<div class="no-courses">加载课程表失败，请检查schedule.json文件</div>';
+                    '<div class="no-courses">日程为空qwq</div>';
             }
         }
 
