@@ -205,6 +205,165 @@
             font-size: 1.4rem;
             opacity: 0.7;
         }
+
+        /* 移动端优化 */
+        @media (max-width: 768px) {
+            /* 时间显示区域优化 */
+            .time-section {
+                padding: 20px 5%;
+                justify-content: flex-start;
+                padding-top: 20vh;
+            }
+
+            .current-time {
+                font-size: 5rem;
+                text-align: center;
+                margin-bottom: 20px;
+            }
+
+            .current-time br {
+                display: block;
+                margin-top: 10px;
+            }
+
+            .current-time span {
+                font-size: 1.2rem !important;
+                display: block;
+                margin-top: 5px;
+            }
+
+            .status-main {
+                font-size: 1.8rem;
+                text-align: center;
+                margin: 15px 0;
+            }
+
+            .status-detail {
+                font-size: 1.2rem;
+                text-align: center;
+            }
+
+            .progress-bar {
+                width: 100%;
+                max-width: 300px;
+                margin: 20px auto;
+            }
+
+            /* 课程表区域优化 */
+            .schedule-section {
+                padding: 40px 5% 20px;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+                margin-bottom: 30px;
+            }
+
+            /* 课程项优化 - 改为垂直布局 */
+            .course-item {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 20px;
+                gap: 15px;
+            }
+
+            .course-left {
+                width: 100%;
+            }
+
+            .course-name {
+                font-size: 1.4rem;
+            }
+
+            .course-time {
+                font-size: 1.1rem;
+            }
+
+            .course-right {
+                width: 100%;
+                text-align: left;
+                min-width: auto;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .countdown {
+                font-size: 1.3rem;
+                margin-bottom: 0;
+            }
+
+            .time-status {
+                font-size: 1rem;
+            }
+
+            /* 隐藏移动端不需要的元素 */
+            .scroll-hint {
+                display: none;
+            }
+
+            /* 触摸友好的交互 */
+            .course-item {
+                cursor: pointer;
+            }
+
+            .course-item:active {
+                transform: scale(0.98);
+            }
+        }
+
+        /* 小屏手机优化 */
+        @media (max-width: 480px) {
+            .current-time {
+                font-size: 4rem;
+            }
+
+            .status-main {
+                font-size: 1.5rem;
+            }
+
+            .status-detail {
+                font-size: 1rem;
+            }
+
+            .course-item {
+                padding: 15px;
+            }
+
+            .course-name {
+                font-size: 1.2rem;
+            }
+
+            .course-time {
+                font-size: 1rem;
+            }
+
+            .countdown {
+                font-size: 1.1rem;
+            }
+
+            .time-status {
+                font-size: 0.9rem;
+                padding: 4px 8px;
+            }
+        }
+
+        /* 横屏模式优化 */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .time-section {
+                padding-top: 10vh;
+                height: auto;
+                min-height: 100vh;
+            }
+
+            .current-time {
+                font-size: 4rem;
+            }
+
+            .status-main {
+                font-size: 1.5rem;
+            }
+        }
     </style>
 </head>
 
@@ -336,7 +495,16 @@
                 second: '2-digit'
             });
 
-            currentTimeElement.innerHTML = `${timeOnly}<br><span style="font-size: 2rem; opacity: 0.8;">${dateString}</span>`;
+            // 移动端检测
+            const isMobile = window.innerWidth <= 768;
+            
+            if (isMobile) {
+                // 移动端显示：时间在上，日期在下
+                currentTimeElement.innerHTML = `${timeOnly}<br><span>${dateString}</span>`;
+            } else {
+                // PC端保持原有显示
+                currentTimeElement.innerHTML = `${timeOnly}<br><span style="font-size: 2rem; opacity: 0.8;">${dateString}</span>`;
+            }
 
             // 2. 更新页面标题
             const titleTime = currentTime.toLocaleTimeString('zh-CN', {
